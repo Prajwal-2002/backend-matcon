@@ -1,0 +1,23 @@
+.to{
+    margin: 100px;
+    padding: 2px;
+    width: 300px;
+    height: 150px;
+}
+
+body{
+        padding: 25px 50px 75px 100px;
+}
+
+.to{
+    border:2px solid black;
+} 
+
+.details{
+    border:2px solid black;
+}
+table, th,td {
+    border: 1px solid black;
+    width: 100px;
+    padding: 2px 2px ;
+  }

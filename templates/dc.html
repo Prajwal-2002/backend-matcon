@@ -1,0 +1,110 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>DC</title>
+    <style>
+       .table,th,td{
+        border:1px solid black;
+       }
+        body{
+            padding: 20px;
+            margin-top: 100px;
+        }
+        .dos {
+            width: 500%; 
+            word-wrap: break-word; 
+          }
+       
+    </style>
+</head>
+<body>
+    <h3 style="text-align: center;"> DELIVERY CHALLAN </h3>
+      <br>
+<div class="panel-body">
+    <div class="row">
+            <div class="col-md-6 col-sm-6 text-left ">
+                  <ul style="list-style-type:none; border: 1px solid #000;">
+                      <li><strong>Delivered to</strong></li>
+                      <li>{{c.cust_name}}</li>
+                      <li>{{c.cust_addr1}}</li>
+                      <li>{{c.cust_addr2}}</li>
+                      <li>{{c.cust_city}}-{{c.cust_pin}}</li>
+                      <li>{{c.cust_st_name}}</li>
+                  </ul>
+             </div>
+           <div class="col-md-6 col-sm-6 text-right">
+            <ul style="list-style-type:none; border: 1px solid #000;">
+                <li><strong>DC details</strong></li>
+                <li><strong>Outward DC No &emsp; : </strong> {{odc1.gcn_no}}</li>
+                <li><strong>Outward DC Date &nbsp; : </strong> {{odc1.gcn_date|date:'d-m-Y'}}</li>
+                <li><strong>PO No &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; :</strong> {{odc1.po_no}}</li>
+                <li><strong>PO Date &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; :</strong> {{odc1.po_date|date:'d-m-Y'}}</li>
+                <li><strong>Inward DC No &emsp;&emsp;:</strong> {{odc1.grn_no}}</li>
+                <li><strong>Inward DC Date &emsp; :</strong> {{odc1.grn_date|date:'d-m-Y'}}</li>
+            </ul>
+        </div>
+              <div class="col-md-6 col-sm-6 text-center ">
+                <ul style="list-style-type:none; text-align: left; border: 1px solid #000;">
+                    <li><strong>Billed to</strong></li>
+                    <li>{{r.cust_name}}</li>
+                    <li>{{r.cust_addr1}}</li>
+                    <li>{{r.cust_addr2}}</li>
+                    <li>{{r.cust_city}}-{{r.cust_pin}}</li>
+                    <li>{{r.cust_st_name}}</li>
+                </ul>
+           </div> 
+    </div>
+</div>
+
+<p>Dear Sir, <br> <br> Please receive the goods in good condition and acknowledge the same.</p> 
+<br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <table id="mytable" class="table">
+                 
+                    <tr>
+                        <th><label>Sl.no</label></th>
+                        <th>Description </th>
+                        <th>QTY</th>
+                        <th>UOM</th>
+                    </tr>
+                    {% for record in odc %}
+                    <tr>
+                        <td>{{record.po_sl_no}}</td>
+                        <td class="dos">{{record.part_name}} - ({{record.part_id}})</td>
+                        <td>{{record.qty_delivered}}</td>
+                        <td>{{record.uom}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>       
+            </div>
+        </div>
+    </div>
+
+    
+
+    <br><br>
+    <div>
+        <p><strong> GST NO: {{m.mat_gst_code}}</strong></p>
+    <br>
+    <p><strong> For MATCON ENGINEERING ENTERPRISES</strong></p>
+    </div>
+    
+    <div  style="float: left; width: 50%">
+        <textarea name="Authorized signatory" id="" cols="30" rows="5"></textarea>
+        <p><strong>Authorized Signatory</strong></p> 
+    </div>
+    <div  style="float: right; width: 50%">
+        <textarea name="" id="" cols="30" rows="5"></textarea>
+        <p><strong>Customer Signature</strong></p> 
+    </div>
+    <br><br><br> <br> <br><br><br><br>
+    <footer>MATCON/FORMS/016/00</footer>
+    </table>
+</body>
+</html>

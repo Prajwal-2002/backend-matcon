@@ -1,0 +1,97 @@
+PartMaster 
+[('150608', 'CATAPLASM TEST', CustomerMaster.objects.get(cust_id='amst')),
+('4316', 'AIR ADAPTOR-NH00001570684', CustomerMaster.objects.get(cust_id='hite')),
+('4344', 'SUPPORT CASTING BRACKET AGTU-NH00001762693', CustomerMaster.objects.get(cust_id='hite')),
+('4348', 'SUPPORT CASTING BRACKET TRANSFORMER-NH00001762423', CustomerMaster.objects.get(cust_id='hite')),
+('4431', 'SUPPORT CASTING BRACKET TRANSFORMER', CustomerMaster.objects.get(cust_id='hite')),
+('4617', 'BRACKET-NH00001763534', CustomerMaster.objects.get(cust_id='hite')),
+('4618', 'BRACKET-NH00001763511', CustomerMaster.objects.get(cust_id='hite')),
+('4650', 'BRACKET-NH00002647283', CustomerMaster.objects.get(cust_id='hite')),
+('A14-01M', 'UPPER SPRING SEAT MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-01M1', 'LOWER SPRING SEAT MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-02M', 'LIFTING HOOK MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-02M1', 'LIFTING HOOK MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-03M', 'ROD ASSEMBLY SUSPENSION MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-04M', 'ROD ASSEMBLY MOTOR ASSEMBLED', CustomerMaster.objects.get(cust_id='side')),
+('A14-05M', 'PIVOT BOGIE MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-07M', 'TRACTION BAR MACHIED', CustomerMaster.objects.get(cust_id='side')),
+('A14-09M', 'LIFTING STOP-RAL9005 MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-09M1', 'LIFTING STOP-RAL7016 MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-09M2', 'LIFTING STOP-RAL7012 MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-10M', 'BREAK SUPPORT FS LH MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-10M1', 'BREAK SUPPORT FI RH MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-12', 'LIFTING STOP MACHNED', CustomerMaster.objects.get(cust_id='side')),
+('A14-13M', 'DAMPER BRACKET MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('A14-14M', 'STOP WASHER MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('AR00000247343', 'RELESE LEVER', CustomerMaster.objects.get(cust_id='samu')),
+('AT00000461232,D', 'END SHIELD-DRIVING SIDE PART',CustomerMaster.objects.get(cust_id='amst')),
+('AT0000055373,B', 'END SHIELD-NON DRIVING SIDE PART', CustomerMaster.objects.get(cust_id='amst')),
+('F5-61', 'COVER RETAINER SUCTION SIZE A/B/C WELL SERVICE PUMP SERIES 200 COMMON FORGING', CustomerMaster.objects.get(cust_id='side')),
+('F5-61M', 'COVER RETAINER, DISCHARGE, SIZE A/B/C WELL SERVICE PUMP MACHINED', CustomerMaster.objects.get(cust_id='side')),
+('F5-67M', 'COVER ROUGH MACHINED DISCHARGE SIZE A/B/C WELL SERVICE PUMPASSEMBLED', CustomerMaster.objects.get(cust_id='side')),
+('PEV-15-00083531', 'LIFTING STOP MACHNED',CustomerMaster.objects.get(cust_id='amst'))]
+
+PO
+[('041/2023-2024', '03-05-2023', '0', '', CustomerMaster.objects.get(cust_id='samu'), '', 'samu', 'samu', '1', 'AR00000247343', '230', '26', 'Nos', '1224.00', '0.00'),
+('041/2023-2024', '06-04-2022', '0', '', CustomerMaster.objects.get(cust_id='samu'), '', 'samu', 'samu', '2', 'AR00000247343', '100', '30', 'Nos', '156.00', '0.00'),
+('2022-23/00073', '06-04-2022', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'hite', '1', '4316', '500', '0', 'Nos', '1415.00', '0.00'),
+('2023-24/00017', '03-04-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'hite', '1', '4344', '286', '0', 'No', '1240.00', '0.00'),
+('2023-24/00017', '03-04-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'hite', '2', '4348', '208', '0', 'No', '3880.00', '0.00'),
+('2023-24/00022', '04-04-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'hite', '1', '4617', '670', '0', 'Nos', '1420.00', '0.00'),
+('2023-24/00022', '04-04-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'hite', '2', '4618', '288', '0', 'Nos', '1705.00', '0.00'),
+('2023-24/01295', '25-09-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'alst', '1', '4316', '450', '0', 'Nos', '1301.80', '0.00'),
+('2023-24/01296', '25-09-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'alst', '1', '4650', '1319', '85', 'Nos', '1306.40', '0.00'),
+('2023-24/01297', '25-09-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'alst', '1', '4344', '118', '0', 'Nos', '1140.80', '0.00'),
+('2023-24/01297', '25-09-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'alst', '2', '4348', '322', '96', 'Nos', '3569.60', '0.00'),
+('2023-24/01298', '25-09-2023', '0', '', CustomerMaster.objects.get(cust_id='hite'), '', 'hite', 'alst', '1', '4431', '76', '0', 'Nos', '3569.60', '0.00'),
+('63/2020-2021', '18-06-2020', '0', '', CustomerMaster.objects.get(cust_id='amst'), '', 'amst', 'amst', '1', 'AT00000461232,D', '384', '35', 'Nos', '18000.00', '0.00'),
+('63/2020-2021', '18-06-2020', '0', '', CustomerMaster.objects.get(cust_id='amst'), '', 'amst', 'amst', '2', 'AT0000055373,B', '384', '32', 'Nos', '18000.00', '0.00'),
+('63/2020-2021', '18-06-2020', '0', '', CustomerMaster.objects.get(cust_id='amst'), '', 'amst', 'amst', '3', 'PEV-15-00083531', '384', '0', 'Nos', '1820.00', '0.00'),
+('63/2020-2021', '18-06-2020', '0', '', CustomerMaster.objects.get(cust_id='amst'), '', 'amst', 'amst', '4', '150608', '1', '0', 'Nos', '21875.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '1', 'A14-02M', '0', '0', 'Nos', '400.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '2', 'A14-02M1', '0', '0', 'Nos', '400.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '3', 'A14-03M', '0', '0', 'Nos', '2200.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '4', 'A14-01M1', '0', '0', 'Nos', '700.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '5', 'A14-01M', '0', '0', 'Nos', '670.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '6', 'A14-04M', '0', '0', 'Nos', '850.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '7', 'A14-05M', '0', '0', 'Nos', '3000.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '8', 'A14-07M', '0', '0', 'Nos', '15800.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '9', 'A14-09M', '0', '0', 'Nos', '1690.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '13', 'A14-09M2', '0', '0', 'Nos', '1690.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '14', 'A14-09M1', '0', '0', 'Nos', '1690.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '17', 'A14-10M', '0', '0', 'Nos', '2050.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '18', 'A14-10M1', '0', '0', 'Nos', '2050.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '19', 'F5-61', '0', '0', 'Nos', '697.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '20', 'F5-67M', '0', '86', 'Nos', '250.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '21', 'A14-12', '0', '0', 'Nos', '1670.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '22', 'F5-61M1', '0', '0', 'Nos', '671.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '23', 'A14-13M', '0', '0', 'Nos', '2000.00', '0.00'),
+('PUR/JW/2021000011', '03-12-2020', '1', '31-12-2024', CustomerMaster.objects.get(cust_id='side'), '', 'side', 'side', '24', 'A14-14M', '0', '0', 'Nos', '1330.00', '0.00')]
+2024-12-31
+
+for item in data:
+   ...:     if(item[1]!='' or item[3]!=''):
+   ...:         pd = datetime.datetime.strptime(item[1], "%d/%m/%Y").strftime("%Y-%m-%d")
+   ...:         opv = datetime.datetime.strptime(item[3], "%d/%m/%Y").strftime("%Y-%m-%d")
+   ...:         ins = Po(
+
+ins = Po(po_no=item[0], po_date=pd, open_po=item[2], open_po_validity=opv, cust=item[4], quote_ref_no=item[5], receiver_id=item[6], consignee_id=item[7], po_sl_no=item[8], part_id=item[9], qty=item[10], qty_sent=item[11], uom=item[12], unit_price=item[13], total_price=item[14])
+
+ins = Po(po_no=item[0], po_date=pd, open_po=item[2], open_po_validity=item[3], cust=item[4], quote_ref_no=item[5], receiver_id=item[6], consignee_id=item[7], po_sl_no=item[8], part_id=item[9], qty=item[10], qty_sent=item[11], uom=item[12], unit_price=item[13], total_price=item[14])
+
+InwDc
+
+[('10616', '22-09-2023', '0', '041/2023-2024', '03-05-2023', 'samu', 'samu', '1', 'samu', 'AR00000247343', 'RELESE LEVER', '50', 'painting', 'Nos', '1224.00', '0.00', '26', '24'),
+('2023-24/08784', '21-08-2023', '0', '2022-23/00073', '06-04-2022', 'hite', 'alst', '1', 'hite', '4316', 'AIR ADAPTOR-NH00001570684', '3', 'painting', 'Nos', '1415.00', '0.00', '0', '50'),
+('2023-24/08785', '21-08-2023', '0', '2022-23/00073', '06-04-2022', 'hite', 'alst', '1', 'hite', '4316', 'AIR ADAPTOR-NH00001570684', '4', 'painting', 'Nos', '1415.00', '0.00', '0', '50'),
+('2023-24/10653', '25-09-2023', '0', '2023-24/01295', '25-09-2023', 'hite', 'alst', '1', 'hite', '4316', 'AIR ADAPTOR-NH00001570684', '90', 'painting', 'Nos', '1301.80', '0.00', '0', '50'),
+('2023-24/10654', '25-09-2023', '0', '2023-24/01295', '25-09-2023', 'hite', 'alst', '1', 'hite', '4316', 'AIR ADAPTOR-NH00001570684', '7', 'painting', 'Nos', '1301.80', '0.00', '0', '50'),
+('2023-24/10655', '25-09-2023', '0', '2023-24/01295', '25-09-2023', 'hite', 'alst', '1', 'hite', '4316', 'AIR ADAPTOR-NH00001570684', '70', 'painting', 'Nos', '1301.80', '0.00', '0', '50'),
+('2023-24/10945', '30-09-2023', '0', '2023-24SELECT * FROM inw_dc;/01296', '25-09-2023', 'hite', 'alst', '1', 'hite', '4650', 'BRACKET-NH00002647283', '85', 'painting', 'Nos', '1306.40', '0.00', '85', '0'),
+('2023-24/11421', '09-10-2023', '0', '2023-24/01297', '25-09-2023', 'hite', 'alst', '2', 'hite', '4348', 'SUPPORT CASTING BRACKET TRANSFORMER-NH00001762423', '41', 'painting', 'Nos', '3569.60', '0.00', '41', '0'),
+('2023-24/11422', '09-10-2023', '0', '2023-24/01297', '25-09-2023', 'hite', 'alst', '2', 'hite', '4348', 'SUPPORT CASTING BRACKET TRANSFORMER-NH00001762423', '55', 'painting', 'Nos', '3569.60', '0.00', '55', '0'),
+('914/23-24', '07-10-2023', '0', '63/2020-2021', '18-06-2020', 'amst', 'amst', '1', 'amst', 'AT00000461232,D', 'END SHIELD-DRIVING SIDE PART', '35', 'painting', 'Nos', '18000.00', '0.00', '35', '0'),
+('SC232400374', '09-10-2023', '0', 'PUR/JW/2021000011', '03-12-2020', 'side', 'side', '20', 'side', 'F5-67M', 'COVER ROUGH MACHINED DISCHARGE SIZE A/B/C WELL SERVICE PUMP ASSEMBLED', '86', 'painting', 'Nos', '250.00', '0.00', '86', '0')]
+
+InwDc(grn_no=item[0], grn_date=gd, rework_dc=item[2], po_no=item[3], po_date=pd, receiver_id=item[5], consignee_id=item[6], po_sl_no=item[7], cust_id=item[8], part_id=item[9], part_name=item[10], qty_received=item[11], purpose=item[12], uom=item[13], unit_price=item[14], total_price=item[15], qty_delivered=item[16], qty_balance=item[17])
+pd = datetime.datetime.strptime(item[4], "%d-%m-%Y").strftime("%Y-%m-%d")

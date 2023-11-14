@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPORTS</title>
+    <style>
+        .report-container {
+            width: 50%;
+            margin: 25% auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        
+        .report-heading {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .gcno-text {
+            font-weight: bold;
+        }
+        
+        .report-button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .report-button:hover {
+            background-color: #ff6600;
+        }
+        
+        .report-link {
+            text-decoration: none;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <h3 class="report-heading">Reports Printing</h3>
+        <p class="gcno-text">GCN NO: </p>
+        <button class="report-button"><a href="{% url 'dc' %}" class="report-link">Print DC</a></button>
+        <button class="report-button"><a href="{% url 'invoice' %}" class="report-link">Print Invoice</a></button>
+    </div>
+    
+</body>
+</html>
