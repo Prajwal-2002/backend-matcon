@@ -14,5 +14,6 @@ urlpatterns = [
     path("login/",LoginPage.as_view(),name='login'),
     path('logout/',LogoutPage.as_view(),name='logout'),
     path("signup/", SignUpPage.as_view(),name='signup'),
+    path('invoice-report/', InvoiceReport.as_view(), name='invoice-report'),
     
 ]

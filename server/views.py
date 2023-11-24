@@ -1,3 +1,6 @@
+import sys
+import openpyxl
+from dateutil.parser import parse
 from django.shortcuts import render,HttpResponse
 from rest_framework import status
 from django.forms.models import model_to_dict
@@ -20,8 +23,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login,logout
 import json
+from django.shortcuts import render
+from django.db.models import Sum
+import pandas as pd
+from .models import OtwDc
+from django.db.models import F, ExpressionWrapper, DateTimeField
+from django.db.models.functions import Cast
+from django.utils.timezone import make_aware
 
 from babel.numbers import format_currency
+
+
 
 def report(request):
     return render(request,'reports.html')
@@ -199,7 +211,32 @@ class PurchaseOrderInput(APIView):
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+class InvoiceReport(APIView):
+    # def get(self, request):
+    #     # print("invoice report dates")
+    #     try:
+    #         data = invoice_report(request)
+    #         print(data,"data values")
+    #         if data == True:
+    #             return render(request, 'invoiceReports.html', {'combined_df': data})
+    #         return render(request, 'invoiceReports.html', {'combined_df': data})
+    #         # return Response(data=data, status=status.HTTP_200_OK)
+    #     except Exception as e:
+    #         print(e)
+    #         return Response(status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request):
+        try:
+            data = invoice_report(request)
+            print(data, "data values")
+            if data is not None:
+                return Response({'message': 'GET request received'}, status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)   
+    def post(self, request):
+        return Response({'message': 'POST request received'}, status=status.HTTP_200_OK)
+    
 
 def invoice_processing(request):
     grn_no = request.data['grn_no']
@@ -298,12 +335,12 @@ def invoice_processing(request):
             else:
                 flag=''    
             gcn_num=(str(destination_value).zfill(3)  + flag+ "/" + str(fin_year)+"-"+str(fyear))
-            source_value = get_object_or_404(MatCompanies, mat_code=mat_code).last_gcn_no
-            destination_value = source_value + 1
+            # source_value = get_object_or_404(MatCompanies, mat_code=mat_code).last_gcn_no
+            # destination_value = source_value + 1
 
-            MatCompanies.objects.filter(mat_code=mat_code).update(last_gcn_no=destination_value)
+            # MatCompanies.objects.filter(mat_code=mat_code).update(last_gcn_no=destination_value)
 
-            gcn_num=(str(destination_value) + "/" + str(fin_year)+"-"+str(fyear)).zfill(11)
+            # gcn_num=(str(destination_value) + "/" + str(fin_year)+"-"+str(fyear)).zfill(11)
 
             current_date = current
             date = str(current_date.strftime('%Y-%m-%d'))
@@ -448,7 +485,124 @@ def dc_print(request):
     except Exception as e:
         print(e)
         return "invalid otw_dc_no"
+def invoice_report(request):
+  try:  
+    start_date_str = request.query_params.get('data[start_date]')
+    end_date_str = request.query_params.get('data[end_date]')
+    print(f"Start Date: {start_date_str}, End Date: {end_date_str}")
+    start_datetime = datetime.strptime(start_date_str, "%Y-%m-%d")
+    end_datetime = datetime.strptime(end_date_str, "%Y-%m-%d")
+    start_date=start_datetime.date()
+    end_date=end_datetime.date()
+    
+    # result = OtwDc.objects.filter(
+    # gcn_date__gte=start_date,
+    # gcn_date__lt=end_date
+    # ).values(
+    # 'gcn_no', 'gcn_date', 'qty_delivered', 'taxable_amt', 'cgst_price', 'sgst_price', 'igst_price',
+    # 'receiver_id__cust_name', 'receiver_id__cust_gst_id',
+    # ).order_by('gcn_date')
+    result = OtwDc.objects.filter(
+    gcn_date__range=(start_date, end_date)
+    ).select_related('receiver_id').values(
+    'gcn_no', 'gcn_date', 'qty_delivered', 'taxable_amt', 'cgst_price', 'sgst_price', 'igst_price',
+    'receiver_id__cust_name', 'receiver_id__cust_gst_id',
+    ).order_by('gcn_date')
+    
+    print(str(result.query))
+    
+    excel_writer = pd.ExcelWriter('invoiveReports.xlsx', engine='xlsxwriter')
+    
+    # for item in result:
+    df = pd.DataFrame(result, columns=['gcn_no', 'gcn_date', 'qty_delivered', 'taxable_amt', 'cgst_price', 'sgst_price', 'igst_price', 'receiver_id__cust_name', 'receiver_id__cust_gst_id'])
+    df = df[['receiver_id__cust_name', 'receiver_id__cust_gst_id', 'gcn_no', 'gcn_date', 'qty_delivered', 'taxable_amt', 'cgst_price', 'sgst_price', 'igst_price']]
+    df.insert(0, 'Sl No', range(1, len(df) + 1))
+    df['HSN/SSC'] = 9988
+    df = df.rename(columns={
+            'gcn_no': 'Invoice Number',
+            'gcn_date': 'Invoice Date',
+            'qty_delivered': 'Quantity',
+            'taxable_amt': 'Ass.Value',
+            'cgst_price': 'CGST Price (9%)',
+            'sgst_price': 'SGST Price (9%)',
+            'igst_price': 'IGST Price (18%)',
+            'receiver_id__cust_name': 'Customer Name',
+            'receiver_id__cust_gst_id': 'Customer GST Num',
+        })
+    df1 = df[['Customer Name', 'Customer GST Num']].copy()
 
+    grouped = df.groupby(['Invoice Number','Invoice Date']).agg({
+            'Quantity': 'sum',
+            'Ass.Value': 'sum',
+            'CGST Price (9%)': 'sum',
+            'SGST Price (9%)': 'sum',
+            'IGST Price (18%)': 'sum'
+        }).reset_index()
+   
+    
+    df1 = df[['Invoice Number', 'Customer Name', 'Customer GST Num']].drop_duplicates()
+    df1['HSN/SSC'] = 9988
+   
+    combined_df = pd.merge(df1, grouped, on='Invoice Number', how='left')
+    combined_df['Sl No'] = range(1, len(combined_df) + 1)
+    
+    total_taxable_amt = grouped['Ass.Value'].sum()
+    total_cgst_price = grouped['CGST Price (9%)'].sum()
+    total_sgst_price = grouped['SGST Price (9%)'].sum()
+    total_igst_price = grouped['IGST Price (18%)'].sum()
+
+    total_row = pd.DataFrame({
+            'Sl No': 'Total',
+            'Customer Name': '',
+            'Customer GST Num': '',
+            'Ass.Value': total_taxable_amt,
+            'CGST Price (9%)': total_cgst_price,
+            'SGST Price (9%)': total_sgst_price,
+            'IGST Price (18%)': total_igst_price,
+            'HSN/SSC': '',
+        }, index=[0])
+     
+    combined_df = pd.concat([combined_df, total_row], ignore_index=True)
+
+    combined_df['HSN/SSC'] = combined_df['HSN/SSC'].iloc[:-1].where(combined_df['Sl No'] != len(combined_df), 9988)
+   
+    combined_df['Invoice Value'] = combined_df['Ass.Value'] + combined_df['IGST Price (18%)'] + combined_df['CGST Price (9%)'] + combined_df['SGST Price (9%)']
+
+    combined_df['Invoice Value'] = pd.to_numeric(combined_df['Invoice Value']).round()
+    
+    combined_df[['Ass.Value', 'IGST Price (18%)', 'CGST Price (9%)', 'SGST Price (9%)', 'Invoice Value']] = \
+        combined_df[['Ass.Value', 'IGST Price (18%)', 'CGST Price (9%)', 'SGST Price (9%)', 'Invoice Value']].round(2)
+     # print(combined_df,"values of combined df")
+     # combined_df['Round Off'] = combined_df.apply(lambda row: row['Invoice Value'] - (row['Ass.Value'] + row['IGST Price (18%)'] + row['CGST Price (9%)'] + row['SGST Price (9%)']) if row['Sl No'] != 'Total' else None, axis=1)
+    combined_df['Round Off'] = combined_df.apply(
+     lambda row: float(row['Invoice Value']) - (
+        float(row['Ass.Value']) +
+        float(row['IGST Price (18%)']) +
+        float(row['CGST Price (9%)']) +
+        float(row['SGST Price (9%)'])
+     ) if row['Sl No'] != 'Total' else None,
+     axis=1
+     )
+     # print("values of combined df")
+    
+    column_order = ['Sl No', 'Customer Name', 'Customer GST Num', 'Invoice Number', 'Invoice Date', 'Quantity',
+                        'Ass.Value', 'IGST Price (18%)', 'CGST Price (9%)', 'SGST Price (9%)', 'Invoice Value','Round Off','HSN/SSC']
+    combined_df = combined_df[column_order]
+    print("intermeidate df")
+    print(combined_df)
+      
+    combined_df.to_excel('invoiveReports.xlsx',index=False)
+      
+    print("Final Combined DataFrame:")
+    print(combined_df)
+    excel_writer.save()
+    
+    
+    return 
+    
+  except Exception as e:
+        print(e)
+        return "invalid data"
 
 
 
