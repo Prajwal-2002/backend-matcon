@@ -335,12 +335,12 @@ def invoice_processing(request):
             else:
                 flag=''    
             gcn_num=(str(destination_value).zfill(3)  + flag+ "/" + str(fin_year)+"-"+str(fyear))
-            # source_value = get_object_or_404(MatCompanies, mat_code=mat_code).last_gcn_no
-            # destination_value = source_value + 1
+            source_value = get_object_or_404(MatCompanies, mat_code=mat_code).last_gcn_no
+            destination_value = source_value + 1
 
-            # MatCompanies.objects.filter(mat_code=mat_code).update(last_gcn_no=destination_value)
+            MatCompanies.objects.filter(mat_code=mat_code).update(last_gcn_no=destination_value)
 
-            # gcn_num=(str(destination_value) + "/" + str(fin_year)+"-"+str(fyear)).zfill(11)
+            gcn_num=(str(destination_value) + "/" + str(fin_year)+"-"+str(fyear)).zfill(11)
 
             current_date = current
             date = str(current_date.strftime('%Y-%m-%d'))
