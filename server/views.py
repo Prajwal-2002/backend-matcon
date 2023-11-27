@@ -595,7 +595,7 @@ def invoice_report(request):
       
     print("Final Combined DataFrame:")
     print(combined_df)
-    excel_writer.save()
+    excel_writer.close()
     
     
     return 
