@@ -1,4 +1,4 @@
-import sys
+import sys ,os
 import openpyxl
 from dateutil.parser import parse
 from django.shortcuts import render,HttpResponse
@@ -235,7 +235,7 @@ class InvoiceReport(APIView):
             print(e)
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)   
     def post(self, request):
-        return Response({'message': 'POST request received'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Invoice Report is saved on your Desktop'}, status=status.HTTP_200_OK)
     
 
 def invoice_processing(request):
@@ -583,8 +583,14 @@ def invoice_report(request):
     combined_df = combined_df[column_order]
     print("intermeidate df")
     print(combined_df)
+    desktop_path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+
+    file_path = os.path.join(desktop_path, f"{os.getlogin()}_invoiceReports.xlsx")
+    combined_df.to_excel(file_path, index=False)
+    print(f"Excel file saved to: {file_path}")
       
-    combined_df.to_excel('invoiveReports.xlsx',index=False)
+      
+    # combined_df.to_excel('invoiveReports.xlsx',index=False)
       
     print("Final Combined DataFrame:")
     print(combined_df)
