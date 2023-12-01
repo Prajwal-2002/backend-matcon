@@ -424,7 +424,7 @@ def invoice_print(request):
         gcn_no = request.query_params.get('data[gcn_no]')
         print(gcn_no)
         odc = OtwDc.objects.filter(gcn_no=gcn_no)
-        odc1 = get_object_or_404(OtwDc,po_sl_no='1',gcn_no=gcn_no)    
+        odc1=OtwDc.objects.filter(gcn_no=gcn_no)[0] 
         mat = odc1.mat_code
         m = MatCompanies.objects.get(mat_code=mat)
         r_id = odc1.receiver_id.cust_id
