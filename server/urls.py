@@ -13,7 +13,11 @@ urlpatterns = [
     path('part-master-input/', PartMasterInput.as_view(), name='part-master-input'),
     path("login/",LoginPage.as_view(),name='login'),
     path('logout/',LogoutPage.as_view(),name='logout'),
-    path("signup/", SignUpPage.as_view(),name='signup'),
+    path("signup/", SignUpPage.as_view(),name='signup'),sss
     path('invoice-report/', InvoiceReport.as_view(), name='invoice-report'),
+    path('get-part-name/<str:part_id>/<str:cust_id>/', GetPartNameView.as_view(), name='get-part-name'),
+    path('get-po-details/<path:po_no>/', GetPODetailsView.as_view(), name='get-po-details'),
+    path('getAdditionalInfo/<path:po_no>/<int:po_sl_no>/', GetInfoView.as_view(), name='get-po-details'),
+    path('i-p-details/<path:grn_no>/<int:po_sl_no>/', GetIPDetailsView.as_view(), name='i-p-details'),
     
 ]

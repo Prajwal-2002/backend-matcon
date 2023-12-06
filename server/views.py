@@ -172,7 +172,52 @@ class InvoiceProcessing(APIView):
             print(e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class GetPartNameView(APIView):
+    def get(self, request, part_id, cust_id):
+        print("Entering API class")
+        part = get_object_or_404(PartMaster, part_id=part_id, cust_id=cust_id)
+        serializer = PartMasterSerializer(part)
+        return Response({'part_name': serializer.data['part_name']})
 
+class GetPODetailsView(APIView):
+       def get(self, request, po_no):
+        try:
+            print("enetring try block")
+            po_instance =Po.objects.filter(po_no=po_no)[0]
+            serializer =POSerializer(po_instance)
+            return Response({
+                'po_date': serializer.data['po_date'],
+            })
+        except Po.DoesNotExist:
+            return Response({'error': 'PO not found'}, status=404)
+        
+class GetInfoView(APIView):
+       def get(self, request, po_no,po_sl_no):
+        try:
+            print("enetring try block to get info")
+            po_instance =get_object_or_404(Po,po_no=po_no,po_sl_no=po_sl_no)
+            serializer =POSerializer(po_instance)
+            return Response({
+                'part_id': serializer.data['part_id'],
+                'unit_price': serializer.data['unit_price'],
+                'uom': serializer.data['uom'],
+            })
+        except Po.DoesNotExist:
+            return Response({'error': 'PO not found'}, status=404)    
+        
+class GetIPDetailsView(APIView):
+       def get(self, request, grn_no,po_sl_no):
+        try:
+            print("entering try block to get info for invoice processing")
+            ip =get_object_or_404(InwDc,grn_no=grn_no,po_sl_no=po_sl_no)
+            serializer =IPSerializer(ip)
+            return Response({
+                'part_id': serializer.data['part_id'],
+                'unit_price': serializer.data['unit_price'],
+                'part_name': serializer.data['part_name'],
+            })
+        except InwDc.DoesNotExist:
+            return Response({'error': 'Inward DC not found'}, status=404)   
 
 class InwardDcInput(APIView): 
     def post(self, request):

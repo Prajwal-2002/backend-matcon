@@ -30,3 +30,19 @@ class MatCompaniesSerialize(serializers.ModelSerializer):
     class Meta:
         model = MatCompanies
         fields = '__all__'
+        
+class PartMasterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartMaster
+        fields = ['id', 'part_name'] 
+        
+class POSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Po
+        fields = ['po_date', 'unit_price', 'part_id', 'uom']
+
+
+class IPSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InwDc
+        fields = ['part_name','unit_price', 'part_id']
