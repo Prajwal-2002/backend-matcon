@@ -197,7 +197,7 @@ class GetPODetailsView(APIView):
         try:
             print("enetring try block")
             po_instance =Po.objects.filter(po_no=po_no)[0]
-            serializer =POSerializer(po_instance)
+            serializer =PurchaseOrderForm(po_instance)
             return Response({
                 'po_date': serializer.data['po_date'],
                 'cust_id': serializer.data['cust_id'],
@@ -210,7 +210,7 @@ class GetInfoView(APIView):
         try:
             print("enetring try block to get info")
             po_instance =get_object_or_404(Po,po_no=po_no,po_sl_no=po_sl_no)
-            serializer =POSerializer(po_instance)
+            serializer =PurchaseOrderForm(po_instance)
             return Response({
                 'part_id': serializer.data['part_id'],
                 'unit_price': serializer.data['unit_price'],
