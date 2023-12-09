@@ -218,7 +218,27 @@ class GetIPDetailsView(APIView):
             })
         except InwDc.DoesNotExist:
             return Response({'error': 'Inward DC not found'}, status=404)   
-
+class GetINWDetailsView(APIView):
+    def get(self, request, grn_no):
+        print("Entering API class")
+        part = get_object_or_404(InwDc, grn_no=grn_no)
+        serializer = InwardDCForm(part)
+        response_data = {
+            'grn_date': serializer.data['grn_date'],
+            'po_no': part.po_no,  
+            'cust_id': part.cust_id, 
+            'po_date':part.po_date, 
+        }
+        return Response (response_data)
+    
+class GetCN(APIView):
+    def get(self, request,cust_id):
+        print("Entering API class")
+        part = get_object_or_404(CustomerMaster, cust_id=cust_id)
+        serializer = CustomerMasterForm(part)
+        return Response({'cust_name': serializer.data['cust_name']})
+    
+    
 class InwardDcInput(APIView): 
     def post(self, request):
         request.data['qty_delivered'] = 0
