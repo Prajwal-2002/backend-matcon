@@ -218,7 +218,36 @@ class GetInfoView(APIView):
             })
         except Po.DoesNotExist:
             return Response({'error': 'PO not found'}, status=404)    
+class GetPOSlNoDetailsInwView(APIView):
+       def get(self, request, grn_no, part_id):
+        try:
+            print("enetring try block to get info for po sl no")
+            data=get_object_or_404(InwDc, grn_no=grn_no,part_id=part_id)
+            print(data,"data")
+            serializer =InwardDCForm(data)
+            response_data={
+                'po_sl_no': serializer.data['po_sl_no'],
+                'qty_received': serializer.data['qty_received'],
+                'unit_price': serializer.data['unit_price'],
+            }
+            return Response(response_data)
+        except InwDc.DoesNotExist:
+            return Response({'error': 'Inward DC not found'}, status=404)  
         
+    
+class GetPODetailsView(APIView):
+       def get(self, request, po_no):
+        try:
+            print("enetring try block")
+            po_instance =Po.objects.filter(po_no=po_no)[0]
+            serializer =POSerializer(po_instance)
+            return Response({
+                'po_date': serializer.data['po_date'],
+                'cust_id': serializer.data['cust_id'],
+            })
+        except Po.DoesNotExist:
+            return Response({'error': 'PO not found'}, status=404)
+             
 class GetIPDetailsView(APIView):
        def get(self, request, grn_no,po_sl_no):
         try:
